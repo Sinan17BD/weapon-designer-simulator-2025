@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weapon Designer Simulator</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+    .weapon-form, .output, .weapon-image { background: #fff; padding: 20px; border-radius: 8px; margin-top: 20px; }
+    label, select, input { display: block; margin: 10px 0; }
+    img { display: block; margin-top: 10px; border: 1px solid #ccc; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Fictional Weapon Designer Simulator</h1>
+
+  <div class="weapon-form">
+    <label for="type">Weapon Type:</label>
+    <select id="type">
+      <option>Laser Rifle</option>
+      <option>Plasma Cannon</option>
+      <option>Railgun</option>
+    </select>
+
+    <label for="name">Weapon Name:</label>
+    <input type="text" id="name" placeholder="Enter weapon name" />
+
+    <label for="power">Power Level (1-100):</label>
+    <input type="range" id="power" min="1" max="100" />
+
+    <label for="range">Range (meters):</label>
+    <input type="number" id="range" min="10" max="1000" />
+
+    <button onclick="generateWeapon()">Create Weapon</button>
+  </div>
+
+  <div class="output" id="output"></div>
+
+  <div class="weapon-image">
+    <h3>Preview</h3>
+    <img id="weapon-img" src="https://via.placeholder.com/300x150?text=Select+a+Weapon" alt="Weapon preview" width="300" />
+  </div>
+
+  <script>
+    const weaponImages = {
+      "Laser Rifle": "https://via.placeholder.com/300x150?text=Laser+Rifle",
+      "Plasma Cannon": "https://via.placeholder.com/300x150?text=Plasma+Cannon",
+      "Railgun": "https://via.placeholder.com/300x150?text=Railgun"
+    };
+
+    function generateWeapon() {
+      const type = document.getElementById('type').value;
+      const name = document.getElementById('name').value || 'Unnamed';
+      const power = document.getElementById('power').value;
+      const range = document.getElementById('range').value;
+
+      const summary = `
+        <h3>Weapon Summary</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Type:</strong> ${type}</p>
+        <p><strong>Power:</strong> ${power}</p>
+        <p><strong>Range:</strong> ${range} meters</p>
+      `;
+
+      document.getElementById('output').innerHTML = summary;
+
+      // Show image
+      const img = document.getElementById('weapon-img');
+      img.src = weaponImages[type];
+      img.alt = type;
+    }
+  </script>
+</body>
+</html>
